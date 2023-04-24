@@ -49,7 +49,6 @@
                         <table class="table table-striped table tablesorter" id="ipi-table">
                             <thead class="thead-dark">
                                 <tr>
-    
                                     <th class="text-center">Name</th>
                     
                                     <th class="text-center">Price</th>

@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    include '../connection.php';
+//         
+// select * from customers order by customer_id
+// select * from customers order by firstname
+// select * from customers order by age desc
+// select * from customers where gender="female"
+// select * from customers where gender="male"
+    
+    $sql_all_employees = "select * from employees;";
+    $result = mysqli_query($conn,$sql_all_employees);
+    $total_rows_feched=mysqli_num_rows($result);
 
+    ?>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -42,37 +55,41 @@
                                     <th class="text-center">Contact</th>
                                     <th class="text-center">Age</th>
                                     <th class="text-center">Gender</th>
-                                    <th class="text-center">Password</th>
+                                    
                                     <th class="text-center">Usename</th>
                                     <th class="text-center">isAdmin ?</th>
+                                    <th class="text-center">Password</th>
                                     <th class="text-center filter-false sorter-false">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
+                            <?php
+                                while($row = mysqli_fetch_assoc($result)) 
+                                { 
                                     
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
-                                    <td>Ana</td>
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
+                                    ?>
+                                
+                                <tr>
+                                    <td><?php echo $row['firstname']." ".$row['middlename']." ".$row['lastname']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td><?php echo $row['contact']; ?></td>
+                                    <td><?php echo $row['age']; ?></td>
+                                    <td><?php echo $row['gender']; ?></td>
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php if ($row['isadmin']==0)
+                                    {
+                                          echo "Employee";
+                                    }
+                                    else
+                                    {
+                                        echo "Admin";
+                                    } 
+                                    ?></td>
+                                    <td><?php echo $row['password']; ?></td>
+                                  
                                     <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"><i class="far fa-eye"></i></a><a class="btn btnMaterial btn-flat success semicircle" role="button" href="#"><i class="fas fa-pen"></i></a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a></td>
                                 </tr>
-                                <tr>
-                                    <td>Fer<br></td>
-                                    <td>Desarrollador</td>
-                                    <td>Development</td>
-                                    
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
-                                    <td>Ana</td>
-                                    <td>Diseñador</td>
-                                    <td>Diseño</td>
-                                    <td class="text-center align-middle" style="max-height: 60px;height: 60px;"><a class="btn btnMaterial btn-flat primary semicircle" role="button" href="#"><i class="far fa-eye"></i></a><a class="btn btnMaterial btn-flat success semicircle" role="button" href="#"><i class="fas fa-pen"></i></a><a class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover" role="button" style="margin-left: 5px;" data-bs-toggle="modal" data-bs-target="#delete-modal" href="#"><i class="fas fa-trash btnNoBorders" style="color: #DC3545;"></i></a></td>
-                                </tr>
+                                <?php    } ?>
                             </tbody>
                         </table>
                     </div>
